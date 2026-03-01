@@ -1,0 +1,51 @@
+name: Mirror APK from app repo
+
+on:
+  repository_dispatch:
+    types: [new-release]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g. v1.1)'
+        required: true
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download APK from app repo release
+        env:
+          GH_TOKEN: ${{ secrets.APP_REPO_TOKEN }}
+        run: |
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            TAG="${{ github.event.client_payload.tag }}"
+          else
+            TAG="${{ inputs.version }}"
+          fi
+          echo "Downloading APK for tag: $TAG"
+          gh release download "$TAG" \
+            --repo enol-in/enol \
+            --pattern "*.apk" \
+            --output enol-release.apk
+
+      - name: Create release on website repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            TAG="${{ github.event.client_payload.tag }}"
+            NOTES="${{ github.event.client_payload.notes }}"
+          else
+            TAG="${{ inputs.version }}"
+            NOTES="Release $TAG"
+          fi
+
+          # Delete existing release with same tag if it exists
+          gh release delete "$TAG" --repo enol-in/enol-in.github.io --yes 2>/dev/null || true
+          git tag -d "$TAG" 2>/dev/null || true
+          gh api repos/enol-in/enol-in.github.io/git/refs/tags/"$TAG" -X DELETE 2>/dev/null || true
+
+          gh release create "$TAG" enol-release.apk#enol-release.apk \
+            --repo enol-in/enol-in.github.io \
+            --title "enol $TAG" \
+            --notes "$NOTES"
