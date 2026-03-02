@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>enol — Privacy Policy</title>
+    <meta name="description" content="Privacy policy for enol, the AI voice companion for Android.">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #030712; --bg-elevated: #0a0f1a;
+            --surface: rgba(255,255,255,0.04); --surface-hover: rgba(255,255,255,0.07);
+            --border: rgba(255,255,255,0.06); --border-hover: rgba(255,255,255,0.12);
+            --green: #4CAF50; --green-dim: rgba(76,175,80,0.12); --green-glow: rgba(76,175,80,0.25);
+            --purple: #BB86FC; --purple-dim: rgba(187,134,252,0.12);
+            --teal: #03DAC5; --teal-dim: rgba(3,218,197,0.12);
+            --amber: #F59E0B; --amber-dim: rgba(245,158,11,0.12);
+            --text: #e2e8f0; --text-muted: #64748b; --text-dim: #475569;
+            --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+        @media (min-width: 640px) { .container { padding: 0 32px; } }
+        .bg-orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); will-change: transform; }
+        .orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(76,175,80,0.18), transparent 70%); top: -300px; left: -250px; animation: drift1 25s ease-in-out infinite; }
+        .orb-2 { width: 550px; height: 550px; background: radial-gradient(circle, rgba(187,134,252,0.14), transparent 70%); top: 400px; right: -200px; animation: drift2 30s ease-in-out infinite; }
+        .orb-3 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(3,218,197,0.12), transparent 70%); bottom: -150px; left: 25%; animation: drift3 22s ease-in-out infinite; }
+        @keyframes drift1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, 30px) scale(1.08); } }
+        @keyframes drift2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-35px, -25px) scale(1.05); } }
+        @keyframes drift3 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(25px, -35px) scale(0.95); } }
+        .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px; }
+        .glass { background: var(--surface); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border); }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(3,7,18,0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+        .logo img { width: 32px; height: 32px; border-radius: 8px; }
+        .logo span { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+        .nav-cta { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 600; background: var(--green-dim); color: var(--green); border: 1px solid rgba(76,175,80,0.2); text-decoration: none; transition: all 0.2s; }
+        .nav-cta:hover { background: rgba(76,175,80,0.2); }
+        .nav-cta svg { width: 15px; height: 15px; }
+        .content-area { padding: 140px 0 80px; position: relative; z-index: 2; }
+        @media (min-width: 640px) { .content-area { padding: 160px 0 100px; } }
+        .content-card { max-width: 760px; margin: 0 auto; border-radius: 28px; padding: 40px 28px; background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(16px); }
+        @media (min-width: 640px) { .content-card { padding: 56px 48px; } }
+        .content-card h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -1px; line-height: 1.15; margin-bottom: 8px; }
+        .content-card .gradient-text { background: linear-gradient(135deg, var(--green), var(--teal) 50%, var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .content-card .updated { font-size: 13px; color: var(--text-dim); font-family: var(--mono); margin-bottom: 40px; display: block; }
+        .content-card h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; margin: 40px 0 12px; color: var(--green); }
+        .content-card h2:first-of-type { margin-top: 0; }
+        .content-card p { font-size: 15px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+        .content-card ul { list-style: none; padding: 0; margin-bottom: 12px; }
+        .content-card li { font-size: 15px; color: var(--text-muted); line-height: 1.8; padding: 8px 0 8px 20px; position: relative; border-bottom: 1px solid var(--border); }
+        .content-card li:last-child { border-bottom: none; }
+        .content-card li::before { content: ''; position: absolute; left: 0; top: 18px; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+        .content-card li strong { color: var(--text); }
+        .content-card a { color: var(--green); text-decoration: none; transition: color 0.2s; }
+        .content-card a:hover { color: var(--teal); }
+        .content-card code { font-family: var(--mono); font-size: 13px; background: rgba(76,175,80,0.1); color: var(--green); padding: 2px 8px; border-radius: 6px; }
+        footer { border-top: 1px solid var(--border); padding: 28px 0; position: relative; z-index: 2; }
+        .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+        @media (min-width: 640px) { .footer-inner { flex-direction: row; justify-content: space-between; } }
+        .footer-brand { display: flex; align-items: center; gap: 8px; }
+        .footer-brand img { width: 18px; height: 18px; border-radius: 4px; }
+        .footer-brand span { font-size: 13px; color: var(--text-dim); }
+        .footer-link { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+        .footer-link:hover { color: var(--text); }
+        .footer-link svg { width: 16px; height: 16px; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+    </style>
+</head>
+<body>
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+    <div class="grain"></div>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="/" class="logo"><img src="icon.png" alt="enol"><span>enol</span></a>
+                <a href="/#download" class="nav-cta">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Download APK
+                </a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="content-area">
+            <div class="container">
+                <div class="content-card reveal">
+                    <h1><span class="gradient-text">Privacy Policy</span></h1>
+                    <span class="updated">Last updated: March 2, 2026</span>
+
+                    <h2>Overview</h2>
+                    <p>enol is a voice-calling AI assistant for Android. This policy describes how the app handles your data.</p>
+
+                    <h2>Data Collected</h2>
+                    <ul>
+                        <li><strong>API keys</strong> &mdash; Your OpenAI and Inworld API keys are stored on-device in SharedPreferences. They are sent only to their respective services to authenticate your requests.</li>
+                        <li><strong>Audio recordings</strong> &mdash; Microphone audio is captured during calls and voice cloning. Call audio is streamed directly to OpenAI for real-time transcription and is not stored on our servers. Voice clone samples are sent to Inworld AI to create a custom voice.</li>
+                        <li><strong>Conversation data</strong> &mdash; Transcripts, contacts, memory, and scheduled call data are stored as JSON files on your device.</li>
+                        <li><strong>Profile information</strong> &mdash; Your name, gender, and language preferences are stored on-device to personalize AI interactions.</li>
+                    </ul>
+
+                    <h2>Google Drive Backup</h2>
+                    <p>If you opt in, enol can back up your on-device data to Google Drive's app-specific folder using the <code>drive.appdata</code> scope. This folder is private and accessible only by enol. Backups include your settings, contacts, conversations, memory, and schedules. You can sign out at any time to stop backups and revoke access.</p>
+
+                    <h2>Third-Party Services</h2>
+                    <ul>
+                        <li><strong>OpenAI</strong> &mdash; Audio and text are sent to OpenAI's API for speech-to-text, text generation, and text-to-speech. See <a href="https://openai.com/policies/privacy-policy">OpenAI's Privacy Policy</a>.</li>
+                        <li><strong>Inworld AI</strong> &mdash; Voice samples are sent to Inworld for voice cloning. See <a href="https://inworld.ai/privacy-policy">Inworld's Privacy Policy</a>.</li>
+                        <li><strong>Google</strong> &mdash; If you enable backup, Google Drive is used to store backup data. See <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>.</li>
+                    </ul>
+
+                    <h2>Data Storage</h2>
+                    <p>All data is stored locally on your device. enol does not operate any backend servers. No data is collected by the developer. The app does not include any analytics, tracking, or advertising SDKs.</p>
+
+                    <h2>Data Deletion</h2>
+                    <p>You can clear your memory from Settings. Uninstalling the app removes all local data. To delete your Google Drive backup, sign out from the Backup section in Settings or revoke app access from your Google Account settings.</p>
+
+                    <h2>Children's Privacy</h2>
+                    <p>enol is not intended for children under 13. We do not knowingly collect data from children.</p>
+
+                    <h2>Changes</h2>
+                    <p>We may update this policy from time to time. The latest version will always be available at this URL.</p>
+
+                    <h2>Contact</h2>
+                    <p>For questions about this privacy policy, please open an issue on our <a href="https://github.com/enol-in/enol">GitHub repository</a>.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand"><img src="icon.png" alt="enol"><span>&copy; 2025 enol</span></div>
+                <a href="https://github.com/enol-in" class="footer-link"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
