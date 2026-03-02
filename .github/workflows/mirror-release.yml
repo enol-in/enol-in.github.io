@@ -13,43 +13,44 @@ jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
+      - name: Set tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            echo "tag=${{ github.event.client_payload.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Download APK from app repo release
         env:
           GH_TOKEN: ${{ secrets.APP_REPO_TOKEN }}
         run: |
-          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-            TAG="${{ github.event.client_payload.tag }}"
-          else
-            TAG="${{ inputs.version }}"
-          fi
-          echo "Downloading APK for tag: $TAG"
-          gh release download "$TAG" \
+          echo "Downloading APK for tag: ${{ steps.tag.outputs.tag }}"
+          gh release download "${{ steps.tag.outputs.tag }}" \
             --repo enol-in/enol \
             --pattern "*.apk" \
             --output enol-release.apk
 
+      - name: Fetch release notes from app repo
+        env:
+          GH_TOKEN: ${{ secrets.APP_REPO_TOKEN }}
+        run: |
+          gh release view "${{ steps.tag.outputs.tag }}" \
+            --repo enol-in/enol \
+            --json body --jq '.body' > release-notes.md
+
       - name: Create release on website repo
         env:
           GH_TOKEN: ${{ secrets.APP_REPO_TOKEN }}
-          DISPATCH_TAG: ${{ github.event.client_payload.tag }}
-          DISPATCH_NOTES: ${{ github.event.client_payload.notes }}
-          INPUT_VERSION: ${{ inputs.version }}
-          EVENT_NAME: ${{ github.event_name }}
         run: |
-          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
-            TAG="$DISPATCH_TAG"
-            NOTES="$DISPATCH_NOTES"
-          else
-            TAG="$INPUT_VERSION"
-            NOTES="Release $TAG"
-          fi
+          TAG="${{ steps.tag.outputs.tag }}"
 
           # Delete existing release with same tag if it exists
           gh release delete "$TAG" --repo enol-in/enol-in.github.io --yes 2>/dev/null || true
-          git tag -d "$TAG" 2>/dev/null || true
           gh api repos/enol-in/enol-in.github.io/git/refs/tags/"$TAG" -X DELETE 2>/dev/null || true
 
           gh release create "$TAG" enol-release.apk#enol-release.apk \
             --repo enol-in/enol-in.github.io \
             --title "enol $TAG" \
-            --notes "$NOTES"
+            --notes-file release-notes.md
