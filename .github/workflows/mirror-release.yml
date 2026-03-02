@@ -31,12 +31,16 @@ jobs:
       - name: Create release on website repo
         env:
           GH_TOKEN: ${{ secrets.APP_REPO_TOKEN }}
+          DISPATCH_TAG: ${{ github.event.client_payload.tag }}
+          DISPATCH_NOTES: ${{ github.event.client_payload.notes }}
+          INPUT_VERSION: ${{ inputs.version }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
-          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-            TAG="${{ github.event.client_payload.tag }}"
-            NOTES="${{ github.event.client_payload.notes }}"
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            TAG="$DISPATCH_TAG"
+            NOTES="$DISPATCH_NOTES"
           else
-            TAG="${{ inputs.version }}"
+            TAG="$INPUT_VERSION"
             NOTES="Release $TAG"
           fi
 
